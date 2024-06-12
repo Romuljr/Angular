@@ -1,0 +1,106 @@
+<div class="card shadow mb-4 mt-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+            <i class="fa fa-list"></i> Consulta de Clientes
+        </h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th>Nome do Cliente</th>
+                        <th>Email</th>
+                        <th>CPF</th>
+                        <th>Cadastrado em</th>
+                        <th>Operações</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let item of clientes | paginate: { itemsPerPage: 10, currentPage: page, totalItems: clientes.length}">
+                        <td>{{item.nome | titlecase }}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.cpf}}</td>
+                        <td>{{item.dataCriacao | date : 'dd/MM/yyyy'}}</td>
+                        <td>
+
+                            <button class="btn btn-primary btn-sm mr-1" 
+                                    data-target="#modal_edicao"
+                                    data-toggle="modal"
+                                    title="Atualizar">
+                                <i class="fa fa-pencil-alt"></i>
+                            </button>
+
+                            <button class="btn btn-danger btn-sm mr-1" 
+                                    data-target="#modal_exclusao"
+                                    data-toggle="modal"
+                                    title="Excluir">
+                                <i class="fa fa-trash-alt"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            Quantidade de registros: {{clientes.length}}
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <!-- Régua de paginação -->
+            <pagination-controls
+                (pageChange)="handlePageChange($event)"
+                previousLabel="Anterior"
+                nextLabel="Próximo"
+            >
+            </pagination-controls>
+        </div>
+    </div>
+</div>
+
+<!-- Modal edição -->
+<div id="modal_edicao" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white">Atualizar Cliente</h5>
+                <button type="button" class="close text-white" data-bs-dimiss="modal" arial label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Modal body goes here.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dimiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">Salvar Alterações</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal exclusão -->
+<div id="modal_exclusao" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h5 class="modal-title text-white">Excluir Cliente</h5>
+                <button type="button" class="close text-white" data-bs-dimiss="modal" arial label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Modal body goes here.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dimiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger">Confirmar Exclusão</button>
+            </div>
+        </div>
+    </div>
+</div>

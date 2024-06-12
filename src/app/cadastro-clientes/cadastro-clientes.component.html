@@ -1,0 +1,82 @@
+<div *ngIf="mensagem_sucesso" class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Sucesso!</strong> {{mensagem_sucesso}}
+    <button type="button" class="btn-close" aria-label="Close" 
+    (click)="limparMensagens()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div *ngIf="mensagem_erro" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Erro!</strong> {{mensagem_erro}}
+    <button type="button" class="btn-close" aria-label="Close" 
+    (click)="limparMensagens()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Cadastro de Clientes</h6>
+    </div>
+    <div class="card-body">
+
+        <form #formCadastro="ngForm" 
+        (submit)="cadastrarCliente(formCadastro)" 
+        autocomplete="off">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Nome do Cliente:</label>
+                        <input 
+                            type="text" 
+                            name="nome"
+                            ngModel 
+                            class="form-control" 
+                            placeholder="Ex: Rômulo Alves"
+                        />
+                        <div *ngFor="let item of errors.Nome" class="text-danger">
+                            <i class="fa fa-exclamation-circle"></i>{{item}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Email do Cliente:</label>
+                        <input 
+                            type="text" 
+                            name="email" 
+                            ngModel
+                            class="form-control" 
+                            placeholder="Ex: Romuloalves.br@gmail.com"
+                        />
+                        <div *ngFor="let item of errors.Email" class="text-danger">
+                            <i class="fa fa-exclamation-circle"></i>{{item}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>CPF:</label>
+                        <input 
+                            type="text" 
+                            name="cpf" 
+                            ngModel
+                            class="form-control" 
+                            placeholder="Ex: 123.456.789-00" 
+                        />
+                        <div *ngFor="let item of errors.Cpf" class="text-danger">
+                            <i class="fa fa-exclamation-circle"></i>{{item}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="submit" value="Cadastrar Cliente" class="btn btn-success"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
